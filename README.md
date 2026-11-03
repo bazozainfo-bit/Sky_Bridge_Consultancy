@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sky Bridge Consultancy – Website
 
-## Getting Started
+Official website of **Sky Bridge Consultancy**, Lahore — study abroad, tourist visa and air ticketing.
+Live domain: https://skybridgeconsultancy.network
 
-First, run the development server:
+## Tech
+- Next.js 15 (static export) + TypeScript + Tailwind CSS 4
+- No database, no server: every page is pre-built HTML, so hosting is simple and fast.
 
+## Run on your computer
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # open http://localhost:3000
+npm run build    # creates the static site in the "out" folder
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Where to change things
+| What | File |
+|---|---|
+| Phone, WhatsApp, email, address, timings, Facebook, stats (6+, 300+) | `src/data/site.ts` |
+| Team members | `src/data/site.ts` → `team` |
+| Study country pages (Germany, Italy …) | `src/data/study.ts` |
+| Visit visa pages (USA, UAE …) | `src/data/visa.ts` |
+| Home page sections | `src/app/page.tsx` |
+| FAQ page | `src/app/faq/page.tsx` |
+| Terms / Privacy | `src/app/terms-and-conditions/page.tsx`, `src/app/privacy-policy/page.tsx` |
+| Logo files | `public/images/` |
+| CEO photo | `public/images/ceo-ibrar-ahmad.webp` |
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Add a team photo
+1. Save a square photo as `public/images/team-<name>.webp` (e.g. 400×400).
+2. In `src/data/site.ts`, add `photo: "/images/team-<name>.webp"` to that person.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Exact Google Maps pin
+In `src/data/site.ts`, change `mapQuery` to the exact place name or coordinates (e.g. `"31.4800,74.3200"`).
 
 ## Deploy on Vercel
+1. Push this folder to a GitHub repository.
+2. On vercel.com → **Add New → Project** → import the repository. Framework: **Next.js** (auto-detected). Click **Deploy**.
+3. **Settings → Domains** → add `skybridgeconsultancy.network` and `www.skybridgeconsultancy.network`, then add the DNS records Vercel shows at your domain provider.
+4. Every new push to GitHub updates the live site automatically.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Note: Vercel's free Hobby plan is for non-commercial use under Vercel's terms; a business site is expected to use the Pro plan.
